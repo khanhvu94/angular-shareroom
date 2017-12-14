@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="col-md-12">
+    <div class="row main">
+      <div class="main-login main-center">
+        <h3 class="center">Create new post</h3>
+        <form (ngSubmit)="save()" #newPostForm="ngForm">
+          <div class="form-group">
+            <label for="name" class="cols-md-2 control-label">Tiêu đề</label>
+            <div class="cols-md-10">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-user fa" aria-hidden="true"></i>
+                </span>
+                <input type="text" class="form-control" name="title" placeholder="Enter your title" required [(ngModel)]="post.title" #title="ngModel">
+                <div [hidden]="title.valid || title.pristine" class="error">
+                  Tiêu đề không được để trống
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 no-padding">
+              <label for="name" class="cols-md-2 control-label">Thành phố/Tỉnh</label>
+              <div class="cols-md-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-map" aria-hidden="true"></i>
+                  </span>
+                  <input type="text" class="form-control" name="city" placeholder="Enter your city" required [(ngModel)]="post.city" #city="ngModel">
+                  <div [hidden]="city.valid || city.pristine" class="error">
+                    Tiêu đề không được để trống
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 no-padding">
+              <label for="name" class="cols-md-2 control-label">Quận/Huyện</label>
+              <div class="cols-md-10">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="district" placeholder="Enter your district" required [(ngModel)]="post.district"
+                    #district="ngModel">
+                </div>
+              </div>
+            </div>
+<!-- 
+            <div class="col-md-3 no-padding">
+              <label for="name" class="cols-md-2 control-label">Phường/Xã</label>
+              <div class="cols-md-10">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="town" placeholder="Enter your town" required [(ngModel)]="post.town" #town="ngModel">
+                </div>
+              </div>
+            </div> -->
+
+            <!-- <div class="col-md-3 no-padding">
+            <label for="name" class="cols-md-2 control-label">Đường/hẻm</label>
+            <div class="cols-md-10">
+              <div class="input-group">
+                <input type="text" class="form-control" name="street" placeholder="Enter your street" required [(ngModel)]="post.street" #street="ngModel">
+              </div>
+            </div>
+          </div> -->
+
+          <label for="name" class="cols-md-2 control-label">Địa chỉ</label>
+          <div class="cols-md-10">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-location-arrow" aria-hidden="true"></i>
+              </span>
+              <input type="text" class="form-control" name="address" placeholder="Enter your address" required [(ngModel)]="post.address" #address="ngModel">
+              <div [hidden]="address.valid || address.pristine" class="error">
+                Địa chỉ không được để trống
+              </div>
+            </div>
+          </div>
+
+          </div>
+          <div class="form-group">
+            <label for="name" class="col-md-12  control-label">Tìm kiếm bản đồ</label>
+            <div class="col-md-10" style="padding:0px">
+              <div [hidden]="submitted">
+                <form (ngSubmit)="onSubmit()" #locForm="ngForm">
+                  <div class="col-md-12" style="padding:0px">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                      </span>
+                      <div class="form-group">
+                        <input type="text" class="form-control" value="{{post.map_address}}" id="locInput" name="locInput" ([ngModel])="locInput"
+                          #search [formControl]="searchControl" required>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-md-2" style="padding:0px">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-street-view" aria-hidden="true"></i>
+                </span>
+                <button (click)="mylocation()" class="form-control">Vị trí của tôi</button>
+              </div>
+            </div>
+            <h6>Tọa độ: Lat {{post.latitude}}, Long {{post.longitude}}</h6>
+            <sebm-google-map [latitude]="post.latitude" [longitude]="post.longitude" [scrollwheel]="false" [zoom]="zoom">
+              <sebm-google-map-marker [latitude]="post.latitude" [longitude]="post.longitude" [markerDraggable]="true" (dragEnd)="markerDragEnd($event)"></sebm-google-map-marker>
+            </sebm-google-map>
+          </div>
+          <div class="clearfix center-block" align="center">
+            <button type="button" (click)="clearPost()" class="btn btn-danger">Clear</button>
+            <button type="submit" [disabled]="!newPostForm.form.valid" class="btn btn-success">Sign Up</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

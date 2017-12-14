@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="main">
+    <div class="col-md-3">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="fa fa-money" aria-hidden="true"> Tiền</i>
+        </span>
+        <select class="form-control">
+          <option>Dưới 1 triệu</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="input-group">
+        <span class="input-group-addon">
+            <i class="fa fa-map" aria-hidden="true"> Diện tích</i>
+        </span>
+        <select class="form-control">
+          <option>Dưới 10m2</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div [hidden]="submitted">
+        <form (ngSubmit)="onSubmit()" #locForm="ngForm">
+          <div class="col-md-12" style="padding:0px"> 
+            <div class="input-group">
+              <span class="input-group-addon">
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+              </span>
+              <div class="form-group">
+                <input type="text" class="form-control" value="{{currentAddress}}" id="locInput" name="locInput" ([ngModel])="locInput" #search
+                  [formControl]="searchControl" required>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="fa fa-street-view" aria-hidden="true"></i>
+        </span>
+        <button (click)="mylocation()" class="form-control">Vị trí của tôi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<sebm-google-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+  <sebm-google-map-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true" (dragEnd)="markerDragEnd($event)" [iconUrl]="'../../../assets/person-1.png'"></sebm-google-map-marker>
+  <sebm-google-map-marker [latitude]="10.821581049913508" [longitude]="106.78939990781248" [iconUrl]="'../../../assets/home.png'" (mouseOver)="onMouseOver(infoWindow,gm)">
+    <sebm-google-map-info-window [disableAutoPan]="false" #infoWindow>
+      <div>
+        <div class="caption">
+          <h3>Thumbnail label</h3>
+          <p>text (không đếm được và đếm được; số nhiều: texts) Một văn bản chứa nhiều chữ cái, câu văn. Một quyển sách. Tin
+            nhắn dạng văn bản ngắn được trao đổi bởi các điện thoại di động.</p>
+        </div>
+      </div>
+      <div>
+        <a (click)="ViewDetails(1)" class="btn btn-attention pull-right">View details
+          <i class="fa fa-angle-double-right"></i>
+        </a>
+      </div>
+    </sebm-google-map-info-window>
+  </sebm-google-map-marker>
+  <sebm-google-map-marker [latitude]="10.842401360158942" [longitude]="106.732614181543" [iconUrl]="'../../../assets/home.png'" (mouseOver)="onMouseOver(infoWindow,gm)">
+    <sebm-google-map-info-window [disableAutoPan]="false" #infoWindow>
+      <div>
+        infomation
+      </div>
+      <div>
+        <a (click)="ViewDetails(1)" class="btn btn-attention pull-right">View details
+          <i class="fa fa-angle-double-right"></i>
+        </a>
+      </div>
+    </sebm-google-map-info-window>
+  </sebm-google-map-marker>
+  <sebm-google-map-marker [latitude]="10.773268648105164" [longitude]="106.721627853418" [iconUrl]="'../../../assets/home.png'" (mouseOver)="onMouseOver(infoWindow,gm)">
+    <sebm-google-map-info-window [disableAutoPan]="false" #infoWindow>
+      <div>
+        infomation
+      </div>
+      <div>
+        <a (click)="ViewDetails(1)" class="btn btn-attention pull-right">View details
+          <i class="fa fa-angle-double-right"></i>
+        </a>
+      </div>
+    </sebm-google-map-info-window>
+  </sebm-google-map-marker>
+  <sebm-google-map-marker [latitude]="10.795527746535596" [longitude]="106.79681553652347" [iconUrl]="'../../../assets/home.png'" (mouseOver)="onMouseOver(infoWindow,gm)">
+    <sebm-google-map-info-window [disableAutoPan]="false" #infoWindow>
+      <div>
+        infomation
+      </div>
+      <div>
+        <a (click)="ViewDetails(1)" class="btn btn-attention pull-right">View details
+          <i class="fa fa-angle-double-right"></i>
+        </a>
+      </div>
+    </sebm-google-map-info-window>
+  </sebm-google-map-marker>
+</sebm-google-map>

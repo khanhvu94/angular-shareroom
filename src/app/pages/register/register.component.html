@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="col-md-6">
+    <div class="row main">
+      <div class="main-login main-center">
+        <h3 class="center">Signin form</h3>
+        <form (ngSubmit)="saveSignup()" #signupForm="ngForm">
+          <!-- <div class="container"> -->
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Username or email</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-user fa" aria-hidden="true"></i>
+                </span>
+                <input type="text" class="form-control" name="username" placeholder="Enter your Username or email" required [(ngModel)]="person.username" #username="ngModel">
+                <div [hidden]="username.valid || username.pristine" class="error">
+                  Username can not be empty
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Password</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-lock fa" aria-hidden="true"></i>
+                </span>
+                <input type="password" class="form-control" placeholder="Enter Password" minlength="6" name="password" required [(ngModel)]="person.password"
+                  #password="ngModel" data-toggle="password">
+                <div [hidden]="password.valid || password.pristine" class="error">
+                    Passwords are not empty and more than 6 characters
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">First Name</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-address-card-o fa" aria-hidden="true"></i>
+                </span>
+                <input type="text" name="first_name" class="form-control" placeholder="Firs name" required [(ngModel)]="person.first_name"
+                  #first_name="ngModel">
+                <div [hidden]="first_name.valid || first_name.pristine" class="error">
+                  first name can not be empty
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Lats Name</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-address-card fa" aria-hidden="true"></i>
+                </span>
+                <input type="text" name="last_name" class="form-control" placeholder="Last name" required [(ngModel)]="person.last_name"
+                  #last_name="ngModel">
+                <div [hidden]="last_name.valid || last_name.pristine" class="error">
+                  last name can not be empty
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Phone number</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-phone fa" aria-hidden="true"></i>
+                </span>
+                <input type="text" name="phone" class="form-control" placeholder="Phone number" required [(ngModel)]="person.phone" #phone="ngModel">
+                <div [hidden]="phone.valid || phone.pristine" class="error">
+                  phone number can not be empty
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Email</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                </span>
+                <input type="email" name="email" class="form-control" placeholder="Email" required [(ngModel)]="person.email" #email="ngModel">
+                <div [hidden]="email.valid || email.pristine" class="error">
+                  email can not be empty
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="clearfix center-block" align="center">
+            <button type="button" (click)="clearPerson()" class="btn btn-danger">Clear</button>
+            <button type="submit" [disabled]="!signupForm.form.valid" class="btn btn-success">Sign Up</button>
+          </div>
+          <!-- </div> -->
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="row main">
+      <div class="main-login main-center">
+        <h3 class="center">Signin form</h3>
+        <app-login></app-login>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $("#password").password('toggle');
+</script>
