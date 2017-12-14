@@ -1,8 +1,8 @@
-export class posts{
+export class menu_option{
     text :string;
     link : string;
-    constructor(){
-        this.text = "";
-        this.link = "";
+    constructor(t:string,l:string){
+        this.text = t;
+        this.link = l;
     };
 }

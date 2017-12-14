@@ -13,20 +13,13 @@
       </div>
       <div class="collapse navbar-collapse" id="menu">
         <ul class="nav navbar-nav">
-            <li>
-                <a class="hover-point" (click)="link_rout('/')">Home</a>
-              </li>
-              <li>
-                <a class="hover-point" (click)="link_rout('/maps')">Maps</a>
-              </li>
-              <li>
-                <a class="hover-point" (click)="link_rout('/post')">New post</a>
+              <li (click)="listClick($event)" *ngFor="let item of menu">
+                <a class="hover-point" (click)="link_rout(item.link)">{{item.text}}</a>
               </li>
             </ul>
-            
             <ul class="nav navbar-nav navbar-right" *ngIf="!access_name">
               <li>
-                <a class="hover-point" (click)="link_rout('/signup')">
+                <a class="hover-point" (click)="link_rout('signup')">
                   <span class="glyphicon glyphicon-user"></span> Sign Up</a>
               </li>
               <li>
@@ -38,7 +31,7 @@
               </ul>
               <ul class="nav navbar-nav navbar-right" *ngIf="access_name">
               <li>
-                <a>Hi!{{access_name}} </a>
+                <a>Hi!{{access_name}}</a>
               </li>
               <li>
                 <a (click)="link_rout('/profile')">

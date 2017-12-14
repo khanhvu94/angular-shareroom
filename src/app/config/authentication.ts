@@ -12,8 +12,8 @@ export class Authentication {
 
     isAuthen() : Boolean{
         let name = localStorage.getItem('access_name');
-        let tokent = localStorage.getItem('access_token');
-        if(name && tokent){
+        // let tokent = localStorage.getItem('access_token');
+        if(name){
             return true;
         }
         return false;
@@ -30,10 +30,15 @@ export class Authentication {
     }
 
     getAuthen() :any{
-        let person : any;
-        person.access_name = localStorage.getItem('access_name');
-        person.access_role = localStorage.getItem('access_role');
-        return person;
+        return localStorage.getItem('access_name');
+    }
+
+    getAuthenTokent():String{
+        return localStorage.getItem('access_token');
+    }
+
+    getAuthenRole():String{
+        return localStorage.getItem('access_role');
     }
 
     deleteAuthen(){
