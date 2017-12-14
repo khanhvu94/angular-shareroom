@@ -34,3 +34,6 @@ example: http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and
 
 #google map
 direactive: http://www.17educations.com/angularjs-2/google-map-directions-display-angular-2/
+
+#multi language
+TranslateModule: https://stackoverflow.com/questions/35479739/angular-2-multilingual-support

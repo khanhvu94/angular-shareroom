@@ -2,7 +2,8 @@ import { Component, OnInit,ApplicationRef,Renderer  } from '@angular/core';
 import { AppComponent } from '../../app/app.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Authentication } from '../../app/config/authentication';
-import { menu_option } from '../../app/models/menu_options'
+import { menu_option } from '../../app/models/menu_options';
+import * as menu from '../../app/config/menu-config';
 
 
 @Component({
@@ -22,12 +23,9 @@ export class MenuBarComponent implements OnInit {
     public Authentication : Authentication,
     private render: Renderer
   ) { 
+    this.menu = menu.Menu_left;
       if(this.Authentication.isAuthen()){
         this.access_name = this.Authentication.getAuthen();
-        var item1 = new menu_option("Home","");
-        var item2 = new menu_option("Maps","maps");
-        var item3 = new menu_option("New Post","post");
-        this.menu = [item1,item2,item3];
       }else{
 
       }
