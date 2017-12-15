@@ -10,6 +10,7 @@ export class users{
     email:string;
     avatar:string;
     active:boolean;
+    money_balance:number;
     token : string;
     constructor(){};
 }
