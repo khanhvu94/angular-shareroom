@@ -7,8 +7,12 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { AgmCoreModule,MapsAPILoader } from "angular2-google-maps/core";
 import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 
+import {TranslateModule,TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClientModule, HttpClient} from '@angular/common/http';
+
+
 import { DirectionsMapDirective } from './service/googlr-map.directive';
-import { AppMultiLanguage } from './config/multi-language';
 
 //component layout
 import { AppComponent } from './app.component';
@@ -28,6 +32,10 @@ import { RoomDetailsComponent } from './pages/room-details/room-details.componen
 import { AddNewPostComponent } from './pages/add-new-post/add-new-post.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,12 +52,19 @@ import { MyProfileComponent } from './pages/my-profile/my-profile.component';
     RoomDetailsComponent,
     AddNewPostComponent,
     DirectionsMapDirective,
-    AppMultiLanguage,
     MyProfileComponent 
   ],
   imports: [
+    BrowserModule,
+    HttpClientModule,
     AgmCoreModule.forRoot({apiKey: "AIzaSyC6kqYWKv0TZyjLWZGY498aif2LD9eDB1c",libraries: ["places"]}),
-    BrowserModule, 
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+    }
+    }),
     FormsModule, 
     ReactiveFormsModule,
     HttpModule,

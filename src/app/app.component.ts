@@ -1,31 +1,19 @@
-import { Component } from '@angular/core';
-// import { ActivatedRoute, Router } from '@angular/router';
-// import { Http } from "@angular/http";
-// import { Authentication } from './config/authentication';
-// import * as config from './config/globals';
+import { Component } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-  // providers: [Authentication]
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = 'app';
-  constructor(
-    // public route: ActivatedRoute,
-    // public router: Router,
-    // public Authentication : Authentication,
-    // public http: Http
-    ) { 
+  title = "app";
+  constructor(private translate: TranslateService) {
+    if(!localStorage.getItem("lag")){
+      localStorage.setItem("lag","vi");
     }
-
-    // router_url(url:string) {
-    //   let link = [url];
-    //   this.router.navigate(link);
-    // }
-
-    // getConfig() : any{
-    //   return config;
-    // }
+    translate.addLangs(["vi", "en"]);
+    translate.setDefaultLang(localStorage.getItem("lag"));
+    translate.use(localStorage.getItem("lag"));
+  }
 }

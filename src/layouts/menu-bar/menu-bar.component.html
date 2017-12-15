@@ -8,7 +8,7 @@
           <span class="icon-bar"></span>
         </button>
         <div class="navbar-header">
-            <a class="navbar-brand hover-point" (click)="link_rout('/')">ShareRoom</a>
+            <a class="navbar-brand hover-point" (click)="link_rout('/')">{{ "title" | translate }}</a>
           </div>
       </div>
       <div class="collapse navbar-collapse" id="menu">
@@ -47,11 +47,11 @@
           <ul class="nav navbar-nav navbar-right">
             <li>
                 <a>
-                    <img (click)="setLanguage('eng')" src="../../assets/icon/eng.png" class="img-circle hover-point" alt="English"> </a>               
+                    <img (click)="setLanguage('en')" src="../../assets/icon/eng.png" class="img-circle hover-point" alt="English"> </a>               
             </li>
             <li>
               <a>
-              <img (click)="setLanguage('vni')" src="../../assets/icon/vni.png" class="img-circle hover-point" alt="Tiếng việt">              
+              <img (click)="setLanguage('vi')" src="../../assets/icon/vni.png" class="img-circle hover-point" alt="Tiếng việt">              
               </a>
             </li>
           </ul>
