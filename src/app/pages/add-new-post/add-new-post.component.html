@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="row main">
       <div class="main-login main-center">
-        <h3 class="center">Create new post</h3>
+        <h3 class="center">{{ "create post" | translate }}</h3>
         <form (ngSubmit)="save()" #newPostForm="ngForm">
           <div class="form-group">
             <label for="name" class="cols-md-2 control-label">Tiêu đề</label>
@@ -13,13 +13,13 @@
                 </span>
                 <input type="text" class="form-control" name="title" placeholder="Enter your title" required [(ngModel)]="post.title" #title="ngModel">
                 <div [hidden]="title.valid || title.pristine" class="error">
-                  Tiêu đề không được để trống
+                  {{ "tittle not empty" | translate }}
                 </div>
               </div>
             </div>
 
             <div class="col-md-6 no-padding">
-              <label for="name" class="cols-md-2 control-label">Thành phố/Tỉnh</label>
+              <label for="name" class="cols-md-2 control-label">{{ "city" | translate }}</label>
               <div class="cols-md-10">
                 <div class="input-group">
                   <span class="input-group-addon">
@@ -27,14 +27,14 @@
                   </span>
                   <input type="text" class="form-control" name="city" placeholder="Enter your city" required [(ngModel)]="post.city" #city="ngModel">
                   <div [hidden]="city.valid || city.pristine" class="error">
-                    Tiêu đề không được để trống
+                    {{ "city not empty" | translate }}
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="col-md-6 no-padding">
-              <label for="name" class="cols-md-2 control-label">Quận/Huyện</label>
+              <label for="name" class="cols-md-2 control-label">{{ "district" | translate }}</label>
               <div class="cols-md-10">
                 <div class="input-group">
                   <input type="text" class="form-control" name="district" placeholder="Enter your district" required [(ngModel)]="post.district"
