@@ -1,63 +1,64 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed left" data-toggle="collapse" data-target="#menu">
+        <span class="sr-only">Trình đơn</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed left" data-toggle="collapse" data-target="#menu">
-          <span class="sr-only">Trình đơn</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <div class="navbar-header">
-            <a class="navbar-brand hover-point" (click)="link_rout('/')">{{ "title" | translate }}</a>
-          </div>
-      </div>
-      <div class="collapse navbar-collapse" id="menu">
-        <ul class="nav navbar-nav">
-              <li (click)="listClick($event)" *ngFor="let item of menu">
-                <a class="hover-point" (click)="link_rout(item.link)">{{item.text| translate}}</a>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right" *ngIf="!access_name">
-              <li>
-                <a class="hover-point" (click)="link_rout('signup')">
-                  <span class="glyphicon glyphicon-user"></span> {{ "sign up" | translate }}</a>
-              </li>
-              <li>
-                <a>
-                  <span class="glyphicon glyphicon-log-in"></span>
-                  <button type="button" class="btn-none-border" data-toggle="modal" data-target="#LoginModal">{{ "login" | translate }}</button>
-                </a>
-              </li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right" *ngIf="access_name">
-              <li>
-                <a>Hi!{{access_name}}</a>
-              </li>
-              <li>
-                <a (click)="link_rout('/profile')">
-                  <span class="glyphicon glyphicon-user"></span> {{ "profile" | translate }}</a>
-              </li>
-              <li>
-                <a>
-                  <span class="glyphicon glyphicon-log-out"></span>
-                  <button type="button" class="btn-none-border" (click)="logout()" data-toggle="modal">{{ "logout" | translate }}</button>
-                </a>
-              </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a>
-                    <img (click)="setLanguage('en')" src="../../assets/icon/eng.png" class="img-circle hover-point" alt="English"> </a>               
-            </li>
-            <li>
-              <a>
-              <img (click)="setLanguage('vi')" src="../../assets/icon/vni.png" class="img-circle hover-point" alt="Tiếng việt">              
-              </a>
-            </li>
-          </ul>
+        <a class="navbar-brand hover-point" (click)="link_rout('/')">{{ "title" | translate }}</a>
       </div>
     </div>
-  </nav>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="nav navbar-nav">
+        <li (click)="listClick($event)" *ngFor="let item of menu">
+          <a class="hover-point" (click)="link_rout(item.link)">{{item.text| translate}}</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" *ngIf="!access_name">
+        <li>
+          <a class="hover-point" (click)="link_rout('signup')">
+            <span class="glyphicon glyphicon-user"></span> {{ "sign up" | translate }}</a>
+        </li>
+        <li>
+          <a>
+            <span class="glyphicon glyphicon-log-in"></span>
+            <button type="button" class="btn-none-border" data-toggle="modal" data-target="#LoginModal">{{ "login" | translate }}</button>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" *ngIf="access_name">
+        <li>
+          <a>Hi!{{access_name}}</a>
+        </li>
+        <li>
+          <a class="hover-point" (click)="link_rout('/profile')">
+            <span class="glyphicon glyphicon-user"></span> {{ "profile" | translate }}</a>
+        </li>
+        <li>
+          <a>
+            <span class="glyphicon glyphicon-log-out"></span>
+            <button type="button" class="btn-none-border hover-point" (click)="logout()" data-toggle="modal">{{ "logout" | translate }}</button>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a class="hover-point" (click)="setLanguage('en')">
+            <img  src="../../assets/icon/eng.png" class="img-circle hover-point" alt="English"> English
+          </a>
+        </li>
+        <li>
+          <a class="hover-point" (click)="setLanguage('vi')">
+            <img  src="../../assets/icon/vni.png" class="img-circle hover-point" alt="Tiếng việt"> Việt Nam
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
 <div id="LoginModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -72,5 +73,3 @@
     </div>
   </div>
 </div>
-
-
