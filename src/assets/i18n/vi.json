@@ -1,5 +1,20 @@
 {
-    "title" : "Tìm Phòng",
+    "title" : "Siêu Phòng",
+    "Home" : "trang chủ",
+    "Maps" : "bản đồ",
+    "New Post":"Đăng tin",
     "about" : "About",
-    "contact" : "Contact"
+    "contact" : "Liên hệ",
+    "login" : "Đăng nhập",
+    "sign up": "Đăng ký",
+    "profile": "Thông tin cá nhân",
+    "logout": "Đăng xuất",
+    "login form": "Đăng nhập",
+    "create post": "Đăng bài",
+    "tittle not empty": "Tiêu đề không được trống",
+    "city not empty": "Thành phố không được trống",
+    "address not empty":"Địa chỉ không được trống",
+    "city":"Thành phố/Tỉnh",
+    "district":"Quận/Huyện",
+    "address":"Địa chỉ"
 }
