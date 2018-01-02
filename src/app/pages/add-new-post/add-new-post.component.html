@@ -5,7 +5,7 @@
         <h3 class="center">{{ "create post" | translate }}</h3>
         <form (ngSubmit)="save()" #newPostForm="ngForm">
           <div class="form-group">
-            <label for="name" class="cols-md-2 control-label">Tiêu đề</label>
+            <label for="name" class="cols-md-2 control-label">Title</label>
             <div class="cols-md-10">
               <div class="input-group">
                 <span class="input-group-addon">
@@ -13,70 +13,60 @@
                 </span>
                 <input type="text" class="form-control" name="title" placeholder="Enter your title" required [(ngModel)]="post.title" #title="ngModel">
                 <div [hidden]="title.valid || title.pristine" class="error">
-                  {{ "tittle not empty" | translate }}
+                  {{ "title not empty" | translate }}
                 </div>
               </div>
             </div>
-
-            <div class="col-md-6 no-padding">
-              <label for="name" class="cols-md-2 control-label">{{ "city" | translate }}</label>
-              <div class="cols-md-10">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-map" aria-hidden="true"></i>
-                  </span>
-                  <input type="text" class="form-control" name="city" placeholder="Enter your city" required [(ngModel)]="post.city" #city="ngModel">
-                  <div [hidden]="city.valid || city.pristine" class="error">
-                    {{ "city not empty" | translate }}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 no-padding">
-              <label for="name" class="cols-md-2 control-label">{{ "district" | translate }}</label>
-              <div class="cols-md-10">
-                <div class="input-group">
-                  <input type="text" class="form-control" name="district" placeholder="Enter your district" required [(ngModel)]="post.district"
-                    #district="ngModel">
-                </div>
-              </div>
-            </div>
-<!-- 
-            <div class="col-md-3 no-padding">
-              <label for="name" class="cols-md-2 control-label">Phường/Xã</label>
-              <div class="cols-md-10">
-                <div class="input-group">
-                  <input type="text" class="form-control" name="town" placeholder="Enter your town" required [(ngModel)]="post.town" #town="ngModel">
-                </div>
-              </div>
-            </div> -->
-
-            <!-- <div class="col-md-3 no-padding">
-            <label for="name" class="cols-md-2 control-label">Đường/hẻm</label>
-            <div class="cols-md-10">
-              <div class="input-group">
-                <input type="text" class="form-control" name="street" placeholder="Enter your street" required [(ngModel)]="post.street" #street="ngModel">
-              </div>
-            </div>
-          </div> -->
-
-          <label for="name" class="cols-md-2 control-label">Địa chỉ</label>
-          <div class="cols-md-10">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-location-arrow" aria-hidden="true"></i>
-              </span>
-              <input type="text" class="form-control" name="address" placeholder="Enter your address" required [(ngModel)]="post.address" #address="ngModel">
-              <div [hidden]="address.valid || address.pristine" class="error">
-                Địa chỉ không được để trống
-              </div>
-            </div>
-          </div>
-
           </div>
           <div class="form-group">
-            <label for="name" class="col-md-12  control-label">Tìm kiếm bản đồ</label>
+            <label for="name" class="cols-md-2 control-label">Description</label>
+            <div class="cols-md-10">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-commenting" aria-hidden="true"></i>
+                </span>
+                <input type="text" class="form-control" name="description" placeholder="Enter your description" required [(ngModel)]="post.description" #description="ngModel">
+                <div [hidden]="description.valid || description.pristine" class="error">
+                  {{ "description not empty" | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6" style="padding:0px">
+              <div class="form-group">
+                  <label for="name" class="cols-md-2 control-label">acreage</label>
+                  <div class="cols-md-10">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-map-o fa" aria-hidden="true"></i>
+                      </span>
+                      <input type="number" class="form-control" name="acreage" placeholder="Enter your acreage" required [(ngModel)]="post.acreage" #acreage="ngModel">
+                      <div [hidden]="acreage.valid || acreage.pristine" class="error">
+                        {{ "acreage not empty" | translate }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="col-md-6" style="padding:0px">
+              <div class="form-group">
+                  <label for="name" class="cols-md-2 control-label">price</label>
+                  <div class="cols-md-10">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-money" aria-hidden="true"></i>
+                      </span>
+                      <input type="number" class="form-control" name="price" placeholder="Enter your price" required [(ngModel)]="post.price" #price="ngModel">
+                      <div [hidden]="price.valid || price.pristine" class="error">
+                        {{ "price not empty" | translate }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="name" class="col-md-12  control-label" style="padding:0px">Address</label>
             <div class="col-md-10" style="padding:0px">
               <div [hidden]="submitted">
                 <form (ngSubmit)="onSubmit()" #locForm="ngForm">
@@ -86,7 +76,7 @@
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
                       </span>
                       <div class="form-group">
-                        <input type="text" class="form-control" value="{{post.map_address}}" id="locInput" name="locInput" ([ngModel])="locInput"
+                        <input type="text" class="form-control" value="{{post.address}}" id="locInput" name="locInput" ([ngModel])="locInput"
                           #search [formControl]="searchControl" required>
                       </div>
                     </div>
@@ -99,7 +89,7 @@
                 <span class="input-group-addon">
                   <i class="fa fa-street-view" aria-hidden="true"></i>
                 </span>
-                <button (click)="mylocation()" class="form-control">Vị trí của tôi</button>
+                <button (click)="mylocation()" class="form-control">My location</button>
               </div>
             </div>
             <h6>Tọa độ: Lat {{post.latitude}}, Long {{post.longitude}}</h6>

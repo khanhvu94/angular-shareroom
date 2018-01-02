@@ -7,7 +7,7 @@
 }
 .btn-group .btn {
     border-radius: 0;
-    margin-left: -27px;
+    /* margin-left: -27px; */
 }
 .btn-group .btn:last-child {
     border-top-right-radius: 4px;

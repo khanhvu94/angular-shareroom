@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as slide from "../../app/config/slide";
+
 
 @Component({
   selector: 'app-header',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  public slide : any;
+  constructor() { 
+    this.slide = slide.slide;
+    console.log(this.slide);
+  }
 
   ngOnInit() {
   }

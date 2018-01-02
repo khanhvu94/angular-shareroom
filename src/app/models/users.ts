@@ -3,6 +3,7 @@ export class users{
     id: number;
     username:string;
     password:string;
+    user_type_id : number;
     user_type:user_types;
     first_name:string;
     last_name:string;

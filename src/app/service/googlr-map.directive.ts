@@ -11,8 +11,15 @@ export class DirectionsMapDirective {
   @Input()directionsDisplay : any;
   @Input()estimatedTime : any;
   @Input()estimatedDistance : any;
+  private directionsService: any;
 
   constructor(private gmapsApi : GoogleMapsAPIWrapper) {}
+  clearDirections() {
+    this.directionsService = new google.maps.DirectionsService();
+    if (this.directionsDisplay != null) {
+      this.directionsDisplay.setMap(null);
+    }
+  }
   updateDirections() {
     this.gmapsApi.getNativeMap().then(map => {
         if (!this.origin || !this.destination) {

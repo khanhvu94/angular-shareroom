@@ -4,7 +4,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 import {Buffer} from 'buffer';
 
 export class Security {
-    secret_key = "";
+    secret_key = "timphongtro";
     constructor() {}
 
     ngOnInit(){

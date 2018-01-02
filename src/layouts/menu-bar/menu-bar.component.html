@@ -16,6 +16,9 @@
         <li (click)="listClick($event)" *ngFor="let item of menu">
           <a class="hover-point" (click)="link_rout(item.link)">{{item.text| translate}}</a>
         </li>
+        <li (click)="listClick($event)" *ngFor="let item of menu_host">
+            <a class="hover-point" (click)="link_rout(item.link)">{{item.text| translate}}</a>
+          </li>
       </ul>
       <ul class="nav navbar-nav navbar-right" *ngIf="!access_name">
         <li>
@@ -45,16 +48,16 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a class="hover-point" (click)="setLanguage('en')">
-            <img  src="../../assets/icon/eng.png" class="img-circle hover-point" alt="English"> English
+        <li *ngFor="let item of languages">
+          <a class="hover-point" (click)="setLanguage(item.code)">
+            <img  src="{{item.icon}}" class="img-circle hover-point" alt="{{item.name}}"> {{item.name}}
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a class="hover-point" (click)="setLanguage('vi')">
             <img  src="../../assets/icon/vni.png" class="img-circle hover-point" alt="Tiếng việt"> Việt Nam
           </a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>

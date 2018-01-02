@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
-import { user_types } from '../../models/user_types';
+// import { user_types } from '../../models/user_types';
 import { users } from '../../models/users';
 
 // import { userService } from '../../service/user.service'
@@ -13,7 +13,7 @@ import { users } from '../../models/users';
 export class RegisterComponent implements OnInit {
 
   person : users
-  type : user_types
+  // type : user_types
   constructor(
     // private userService: userService,
     private route: ActivatedRoute,
@@ -31,9 +31,10 @@ export class RegisterComponent implements OnInit {
   }
 
   saveSignup(){
-    this.type = new user_types();
-    this.type.id = Number(1);
-    this.person.user_type = this.type;
+    // this.type = new user_types();
+    // this.type.id = Number(1);
+    this.person.user_type_id = 1;
+    console.log(JSON.stringify(this.person));
     alert(JSON.stringify(this.person));
   }
 

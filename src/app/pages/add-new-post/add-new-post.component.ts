@@ -4,12 +4,16 @@ import { BrowserModule } from "@angular/platform-browser";
 import {AgmCoreModule, MapsAPILoader, GoogleMapsAPIWrapper} from 'angular2-google-maps/core';
 import { } from '@types/googlemaps';
 import { ActivatedRoute, Router } from '@angular/router';
+import { postService } from '../../service/post.service';
+import { Authentication } from '../../config/authentication';
 import { posts } from '../../models/posts';
 
 @Component({
   selector: 'app-add-new-post',
   templateUrl: './add-new-post.component.html',
-  styleUrls: ['./add-new-post.component.css']
+  styleUrls: ['./add-new-post.component.css'],
+  providers: [GoogleMapsAPIWrapper,postService,Authentication]
+  
 })
 export class AddNewPostComponent implements OnInit {
   post: posts
@@ -25,27 +29,34 @@ export class AddNewPostComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone) { }
+    private ngZone: NgZone,
+    private postService : postService    
+  ) { }
 
   ngOnInit() {
     this.post = new posts();
     let id = 0;
     this.sub = this.route.params.subscribe(params => {
       if (id = Number.parseInt(params['id'])) {
-        this.post.title = "aaaaaaaaaaaaaaaaa";
+        this.postService.loadById(id).subscribe(post=>{
+          this.post = post.data[0];
+          console.log(this.post);
+        });
       }
     });
-    //set google maps defaults
     this.zoom = 4;
-    this.post.latitude = 39.8282;
-    this.post.longitude = -98.5795;
+    this.post.latitude = 10.8393845;
+    this.post.longitude = 106.79473569999999;
     this.searchControl = new FormControl();
     this.setCurrentPosition();
     this.mapsAPILoader.load().then(() => this.loadmap());
   }
 
   save() {
-
+    this.post.user_id = 1;
+    this.postService.create(this.post).subscribe(rs=>{
+      console.log(rs.success);
+    });
   }
   clearPost(){
     this.post = new posts();
@@ -87,21 +98,19 @@ export class AddNewPostComponent implements OnInit {
     this.geoCoder.geocode({ 'location': { lat: this.post.latitude, lng: this.post.longitude } }, (results, status) => {
       if (status === 'OK') {
         if (results[0]) {
-          this.post.map_address = results[0].formatted_address;
-          var add= results[0].formatted_address ;
-          var  value=add.split(",");
+          this.post.address = results[0].formatted_address;
+          // var add= results[0].formatted_address ;
+          // var  value=add.split(",");
 
-          let count=value.length;
-          this.post.country=value[count-1];
-          this.post.city=value[count-2];
-          this.post.district=value[count-3];
-          this.post.town = value[count-4];
-          this.post.street = value[count-5]
+          // let count=value.length;
+          // this.post.country=value[count-1];
+          // this.post.city=value[count-2];
+          // this.post.district=value[count-3];
         } else {
-          this.post.map_address = "";
+          this.post.address = "";
         }
       } else {
-        this.post.map_address = "";
+        this.post.address = "";
       }
     });
   }
