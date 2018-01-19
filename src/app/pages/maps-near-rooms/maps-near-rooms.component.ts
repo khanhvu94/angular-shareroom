@@ -60,12 +60,10 @@ export class MapsNearRoomsComponent implements OnInit {
   ngOnInit() {
     this.postService.getList().subscribe(posts => {
       this.posts = posts.data;
-      // this.posts[0].latitude = 10.821581049913508;
-      // this.posts[0].longitude = 106.78939990781248;
-      console.log(this.posts);
+      // console.log(this.posts);
     });
 
-    this.zoom = 4;
+    this.zoom = 11;
     this.latitude = 10.821581049913508;
     this.longitude = 106.78939990781248;
     this.destinationOutput = new FormControl();

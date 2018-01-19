@@ -21,6 +21,10 @@ export class postService {
     return this.http_custom.get('post');
   }
 
+  getListByUser(user:any):any {
+    return this.http_custom.get('post?user_id='+user);
+  }
+
   titleSearch(title:string):any {
     return this.http_custom.get('post?title='+title);
   }
@@ -31,8 +35,18 @@ export class postService {
     return this.http_custom.post("post",post);
   }
 
+  update(post:posts):any{
+    post.city_id = 1;
+    post.district_id = 1;
+    return this.http_custom.put("post",post);
+  }
+
   loadById(id:number){
     return this.http_custom.get('post?id='+id);
+  }
+
+  delete(id:number){
+    return this.http_custom.delete('post?id='+id);
   }
  
 }

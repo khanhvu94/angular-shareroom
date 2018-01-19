@@ -25,6 +25,17 @@ export class DataProvide {
           });
       }
 
+      delete(url:string) : Observable<any> {
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        return this.http.delete(config.BASE_URL_API+url, { headers: headers })
+          .map((res: Response) => {
+            if(res.status == 200){
+              return res.json();
+            }
+          });
+      }
+
       put(url:string,objects:any) : Observable<any> {
         let headers = new Headers();
         headers.append("Content-Type", "application/json");

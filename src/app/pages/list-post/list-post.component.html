@@ -17,7 +17,7 @@
         <td>{{post.price}}</td>
         <td>
           <a class="btn btn-default" (click)="edit(post.id)"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-          <a class="btn btn-default"><i class="fa fa-trash" aria-hidden="true"></i></a>
+          <a class="btn btn-default" (click)="delete(post.id)"><i class="fa fa-trash" aria-hidden="true"></i></a>
         </td>
       </tr>
     </tbody>

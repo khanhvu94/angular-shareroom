@@ -7,6 +7,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { postService } from '../../service/post.service';
 import { Authentication } from '../../config/authentication';
 import { posts } from '../../models/posts';
+import {
+  ToastyService,
+  ToastyConfig,
+  ToastOptions,
+  ToastData
+} from "ng2-toasty";
 
 @Component({
   selector: 'app-add-new-post',
@@ -21,7 +27,8 @@ export class AddNewPostComponent implements OnInit {
   locInput = '';
   public searchControl: FormControl;
   public zoom: number;
-  private geoCoder;
+  public geoCoder;
+  public typeUpdate = false;
 
   @ViewChild("search") public searchElementRef: ElementRef;
 
@@ -30,7 +37,10 @@ export class AddNewPostComponent implements OnInit {
     private router: Router,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private postService : postService    
+    private postService : postService,
+    private toastyService: ToastyService,
+    public Authentication: Authentication,
+    private toastyConfig: ToastyConfig    
   ) { }
 
   ngOnInit() {
@@ -40,7 +50,7 @@ export class AddNewPostComponent implements OnInit {
       if (id = Number.parseInt(params['id'])) {
         this.postService.loadById(id).subscribe(post=>{
           this.post = post.data[0];
-          console.log(this.post);
+          this.typeUpdate = true;
         });
       }
     });
@@ -54,10 +64,34 @@ export class AddNewPostComponent implements OnInit {
 
   save() {
     this.post.user_id = 1;
-    this.postService.create(this.post).subscribe(rs=>{
-      console.log(rs.success);
-    });
+    if(!this.post.id){
+      this.postService.create(this.post).subscribe(rs=>{
+        this.addToast(
+          "success",
+          "Thông báo",
+          "Thêm bài đăng thành công"
+        );
+      });
+    }else{
+      this.postService.update(this.post).subscribe(rs=>{
+        this.addToast(
+          "success",
+          "Thông báo",
+          "Cập nhật bài đăng thành công"
+        );
+      });
+    }
   }
+
+  backtolist(){
+    this.link_rout("myprofile");
+  }
+
+  link_rout(url: string) {
+    let link = ["/" + url];
+    this.router.navigate(link, { skipLocationChange: true });
+  }
+
   clearPost(){
     this.post = new posts();
     this.mylocation();
@@ -99,13 +133,6 @@ export class AddNewPostComponent implements OnInit {
       if (status === 'OK') {
         if (results[0]) {
           this.post.address = results[0].formatted_address;
-          // var add= results[0].formatted_address ;
-          // var  value=add.split(",");
-
-          // let count=value.length;
-          // this.post.country=value[count-1];
-          // this.post.city=value[count-2];
-          // this.post.district=value[count-3];
         } else {
           this.post.address = "";
         }
@@ -123,6 +150,43 @@ export class AddNewPostComponent implements OnInit {
         this.zoom = 12;
         this.getAddress();
       });
+    }
+  }
+
+  addToast(type: string, title: string, mgs: string) {
+    var toastOptions: ToastOptions = {
+      title: title,
+      msg: mgs,
+      showClose: true,
+      timeout: 5000,
+      theme: "bootstrap",
+      onAdd: (toast: ToastData) => {
+        // console.log('Toast ' + toast.id + ' has been added!');
+      },
+      onRemove: function(toast: ToastData) {
+        // console.log('Toast ' + toast.id + ' has been removed!');
+      }
+    };
+    // Add see all possible types in one shot
+    switch (type) {
+      case "default":
+        this.toastyService.default(toastOptions);
+        break;
+      case "info":
+        this.toastyService.info(toastOptions);
+        break;
+      case "success":
+        this.toastyService.success(toastOptions);
+        break;
+      case "wait":
+        this.toastyService.wait(toastOptions);
+        break;
+      case "error":
+        this.toastyService.error(toastOptions);
+        break;
+      case "warning":
+        this.toastyService.warning(toastOptions);
+        break;
     }
   }
 }

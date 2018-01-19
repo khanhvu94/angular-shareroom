@@ -2,7 +2,9 @@
   <div class="col-md-12">
     <div class="row main">
       <div class="main-login main-center">
-        <h3 class="center">{{ "create post" | translate }}</h3>
+        <h3 class="center">
+          {{ "create post" | translate }}
+        </h3>
         <form (ngSubmit)="save()" #newPostForm="ngForm">
           <div class="form-group">
             <label for="name" class="cols-md-2 control-label">Title</label>
@@ -99,6 +101,7 @@
             </sebm-google-map>
           </div>
           <div class="clearfix center-block" align="center">
+            <button type="button" (click)="backtolist()" class="btn btn-info">List post</button>
             <button type="button" (click)="clearPost()" class="btn btn-danger">Clear</button>
             <button type="submit" [disabled]="!newPostForm.form.valid" class="btn btn-success">Save</button>
           </div>

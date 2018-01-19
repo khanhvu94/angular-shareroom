@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as slide from "../../app/config/slide";
-import * as fs from "file-system";
+// import * as fs from "file-system";
 import { Http } from "@angular/http";
 import { Response, RequestOptions, Headers } from "@angular/http";
 
