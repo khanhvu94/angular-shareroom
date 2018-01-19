@@ -11,17 +11,17 @@ import * as menu from "../../app/config/menu-config";
   providers: [Authentication]
 })
 export class MenuBarComponent implements OnInit {
-  private appcom: any;
-  private access_name: any;
-  private menu: any;
-  private menu_host : any;
-  private languages : any;
+  public appcom: any;
+  public access_name: any;
+  public menu: any;
+  public menu_host : any;
+  public languages : any;
 
   constructor(
     public route: ActivatedRoute,
     public router: Router,
     public Authentication: Authentication,
-    private render: Renderer
+    public render: Renderer
   ) {
     this.menu = menu.Menu_left;
     if(this.Authentication.isAuthen()){

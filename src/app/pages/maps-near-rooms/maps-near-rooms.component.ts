@@ -40,8 +40,10 @@ export class MapsNearRoomsComponent implements OnInit {
   public destinationOutput: FormControl;
   public zoom: number;
   public selectedPost: posts;
-  private posts: any;
-  private user : any;
+  public posts: any;
+  public user : any;
+  public origin : any;
+  public destination : any;
 
   @ViewChild("pickupInput") public pickupInputElementRef: ElementRef;
   @ViewChild("pickupOutput") public pickupOutputElementRef: ElementRef;

@@ -3,8 +3,8 @@
   <div class="form-group container">
     <!-- <input placeholder="Enter source location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #pickupInput [formControl]="destinationInput"> -->
       <div class="col-md-10 container" style="padding:0px">
-        <div [hidden]="submitted">
-          <form (ngSubmit)="onSubmit()" #locForm="ngForm">
+        <div>
+          <form #locForm="ngForm">
             <div class="col-md-12" style="padding:0px">
               <div class="input-group">
                 <span class="input-group-addon">
