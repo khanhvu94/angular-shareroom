@@ -22,9 +22,11 @@
       </ul>
       <ul class="nav navbar-nav navbar-right" *ngIf="!access_name">
         <li>
-          <a class="hover-point" (click)="link_rout('signup')">
-            <span class="glyphicon glyphicon-user"></span> {{ "sign up" | translate }}</a>
-        </li>
+          <a>
+            <span class="glyphicon glyphicon-user"></span>
+            <button type="button" class="btn-none-border" data-toggle="modal" data-target="#SignupModal">{{ "sign up" | translate }}</button>
+          </a>
+          </li>
         <li>
           <a>
             <span class="glyphicon glyphicon-log-in"></span>
@@ -63,16 +65,6 @@
   </div>
 </nav>
 
-<div id="LoginModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{ "login form" | translate }}</h4>
-      </div>
-      <div class="modal-body">
-        <app-login></app-login>
-      </div>
-    </div>
-  </div>
-</div>
+  <app-login></app-login>
+  <app-register></app-register>
+

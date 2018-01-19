@@ -29,6 +29,6 @@ export class ListPostComponent implements OnInit {
 
   edit(id:number){
     let link = ["/post/" + id];
-    this.router.navigate(link);
+    this.router.navigate(link, { skipLocationChange: true });
   }
 }

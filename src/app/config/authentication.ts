@@ -1,5 +1,5 @@
 import {Directive, Input, Output} from '@angular/core';
-import { Security } from './security';
+// import { Security } from './security';
 
 export class Authentication {
     security : any;
@@ -7,7 +7,7 @@ export class Authentication {
     }
 
     ngOnInit(){
-        this.security = new Security();
+        // this.security = new Security();
     }
 
     isAuthen() : Boolean{
@@ -20,7 +20,7 @@ export class Authentication {
     }
 
     setAuthen(person:any) : Boolean{
-        if (typeof (Storage) !== "undefined") {
+        if (typeof (Storage) !== "undefined" && person.token && person.user_type ) {
         localStorage.setItem('access_token', person.token);
         localStorage.setItem('access_name',person.first_name);
         localStorage.setItem('access_role',person.user_type);

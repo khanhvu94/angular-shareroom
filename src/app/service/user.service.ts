@@ -17,17 +17,16 @@ export class userService {
     this.http_custom = new DataProvide(this.http);
   }
 
-  Login(person: users): Boolean {
-    person.password = this.Security.enCrypt(person.password);
-    this.http_custom.post('user/login',person).subscribe(user=>{ 
-      console.log(user);
-      if(this.Authentication.setAuthen(user)){
-        window.location.reload();
-        return true;
-      }
-     });
-     return false;
+  Login(person: users): any {
+    console.log(person);
+    return this.http_custom.post('user/login',person);
   }
+
+  Register(person: users): any {
+    // person.password = this.Security.enCrypt(person.password);
+    return this.http_custom.post('user/register',person);
+  }
+
   Logout(){
     this.Authentication.deleteAuthen();
   }

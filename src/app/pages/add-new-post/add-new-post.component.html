@@ -22,11 +22,12 @@
             <label for="name" class="cols-md-2 control-label">Description</label>
             <div class="cols-md-10">
               <div class="input-group">
-                <span class="input-group-addon">
+                <!-- <span class="input-group-addon">
                   <i class="fa fa-commenting" aria-hidden="true"></i>
-                </span>
-                <input type="text" class="form-control" name="description" placeholder="Enter your description" required [(ngModel)]="post.description" #description="ngModel">
-                <div [hidden]="description.valid || description.pristine" class="error">
+                </span> -->
+                <textarea class="form-control" rows="5" name="description" placeholder="Enter your description" required [(ngModel)]="post.description" #description="ngModel">
+                </textarea>
+                  <div [hidden]="description.valid || description.pristine" class="error">
                   {{ "description not empty" | translate }}
                 </div>
               </div>
@@ -99,10 +100,11 @@
           </div>
           <div class="clearfix center-block" align="center">
             <button type="button" (click)="clearPost()" class="btn btn-danger">Clear</button>
-            <button type="submit" [disabled]="!newPostForm.form.valid" class="btn btn-success">Sign Up</button>
+            <button type="submit" [disabled]="!newPostForm.form.valid" class="btn btn-success">Save</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
+

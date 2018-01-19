@@ -37,7 +37,7 @@ export class MenuBarComponent implements OnInit {
 
   link_rout(url: string) {
     let link = ["/" + url];
-    this.router.navigate(link);
+    this.router.navigate(link, { skipLocationChange: true });
   }
 
   logout() {

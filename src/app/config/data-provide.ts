@@ -47,4 +47,13 @@ export class DataProvide {
             }
           });
       }
+
+      getJSONFile(url:string) : Observable<any> {
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        return this.http.get(url , { headers: headers })
+          .map((res: Response) => {
+              return res.json();
+          });
+      }
 }
