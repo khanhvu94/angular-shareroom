@@ -42,6 +42,10 @@ export class BasicSearchComponent implements OnInit {
   }
 
   detail(post:any){
+    if(post.update_at){
+      post.update_at = (new Date(post.update_at)).toDateString();
+
+    }
     this.RoomDetailsComponent.post = post;
     this.RoomDetailsComponent.user = post.user;
   }

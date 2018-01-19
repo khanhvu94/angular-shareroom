@@ -38,13 +38,20 @@ export class RegisterComponent implements OnInit {
   saveSignup(){
     this.person.user_type_id = 1;
     console.log(JSON.stringify(this.person));
-    // alert(JSON.stringify(this.person));
     this.userService.Register(this.person).subscribe(data => {
-        if(data && data.success){
+        if(data){
+          if(data.success){
+            this.addToast(
+              "success",
+              "Register success",
+              "Register success. Please login!"
+            );
+          }
+        }else{
           this.addToast(
-            "success",
-            "Register success",
-            "Register success. Please login!"
+            "error",
+            "Đăng ký không thành công",
+            "Lỗi hệ thống, vui lòng thao tác lại!"
           );
         }
     });

@@ -11,7 +11,8 @@ export class RoomDetailsComponent implements OnInit {
   @Input() post: any;
   @Input() user: any;
   
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit() {
   }

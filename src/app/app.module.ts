@@ -12,6 +12,8 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { DirectionsMapDirective } from "./service/googlr-map.directive";
 import { ToastyModule } from "ng2-toasty";
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { FileUploadModule } from 'ng2-file-upload';
 
 //component layout
 import { AppComponent } from "./app.component";
@@ -70,7 +72,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     HttpModule,
     AgmSnazzyInfoWindowModule,
-    routing
+    routing,
+    Ng2CloudinaryModule,
+    FileUploadModule
   ],
   exports: [BrowserModule, ToastyModule],
   bootstrap: [AppComponent]

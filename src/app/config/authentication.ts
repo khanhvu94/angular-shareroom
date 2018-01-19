@@ -20,13 +20,19 @@ export class Authentication {
     }
 
     setAuthen(person:any) : Boolean{
-        if (typeof (Storage) !== "undefined" && person.token && person.user_type ) {
+        console.log("person"+person);
+        if (typeof (Storage) !== "undefined" && person.token && person.user_type_id ) {
         localStorage.setItem('access_token', person.token);
         localStorage.setItem('access_name',person.first_name);
-        localStorage.setItem('access_role',person.user_type);
+        localStorage.setItem('access_role',person.user_type_id);
+        localStorage.setItem('access_id',person.id);
         return true;
         }
         return false;
+    }
+
+    getAuthenid() :any{
+        return localStorage.getItem('access_id');
     }
 
     getAuthen() :any{

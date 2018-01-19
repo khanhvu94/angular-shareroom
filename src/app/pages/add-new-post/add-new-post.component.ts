@@ -1,12 +1,26 @@
-import { Component, ElementRef, NgModule, NgZone, OnInit, ViewChild, ApplicationRef } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  NgModule,
+  NgZone,
+  OnInit,
+  ViewChild,
+  ApplicationRef
+} from "@angular/core";
 import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
-import {AgmCoreModule, MapsAPILoader, GoogleMapsAPIWrapper} from 'angular2-google-maps/core';
-import { } from '@types/googlemaps';
-import { ActivatedRoute, Router } from '@angular/router';
-import { postService } from '../../service/post.service';
-import { Authentication } from '../../config/authentication';
-import { posts } from '../../models/posts';
+import {
+  AgmCoreModule,
+  MapsAPILoader,
+  GoogleMapsAPIWrapper
+} from "angular2-google-maps/core";
+import {} from "@types/googlemaps";
+import { ActivatedRoute, Router } from "@angular/router";
+import { CloudinaryOptions, CloudinaryUploader } from "ng2-cloudinary";
+
+import { postService } from "../../service/post.service";
+import { Authentication } from "../../config/authentication";
+import { posts } from "../../models/posts";
 import {
   ToastyService,
   ToastyConfig,
@@ -15,16 +29,17 @@ import {
 } from "ng2-toasty";
 
 @Component({
-  selector: 'app-add-new-post',
-  templateUrl: './add-new-post.component.html',
-  styleUrls: ['./add-new-post.component.css'],
-  providers: [GoogleMapsAPIWrapper,postService,Authentication]
-  
+  selector: "app-add-new-post",
+  templateUrl: "./add-new-post.component.html",
+  styleUrls: ["./add-new-post.component.css"],
+  providers: [GoogleMapsAPIWrapper, postService, Authentication]
 })
 export class AddNewPostComponent implements OnInit {
-  post: posts
+  post: posts;
   sub: any;
-  locInput = '';
+  locInput = "";
+  cloudinaryImage: any;
+
   public searchControl: FormControl;
   public zoom: number;
   public geoCoder;
@@ -37,18 +52,25 @@ export class AddNewPostComponent implements OnInit {
     private router: Router,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private postService : postService,
+    private postService: postService,
     private toastyService: ToastyService,
     public Authentication: Authentication,
-    private toastyConfig: ToastyConfig    
-  ) { }
+    private toastyConfig: ToastyConfig
+  ) {}
+
+  uploader: CloudinaryUploader = new CloudinaryUploader(
+    new CloudinaryOptions({ cloudName: "dagoega0j", uploadPreset: "cc7sdoi2" })
+  );
 
   ngOnInit() {
+    if(!this.Authentication.isAuthen()){
+      this.link_rout("");
+    }
     this.post = new posts();
     let id = 0;
     this.sub = this.route.params.subscribe(params => {
-      if (id = Number.parseInt(params['id'])) {
-        this.postService.loadById(id).subscribe(post=>{
+      if ((id = Number.parseInt(params["id"]))) {
+        this.postService.loadById(id).subscribe(post => {
           this.post = post.data[0];
           this.typeUpdate = true;
         });
@@ -63,27 +85,33 @@ export class AddNewPostComponent implements OnInit {
   }
 
   save() {
-    this.post.user_id = 1;
-    if(!this.post.id){
-      this.postService.create(this.post).subscribe(rs=>{
-        this.addToast(
-          "success",
-          "Thông báo",
-          "Thêm bài đăng thành công"
-        );
-      });
-    }else{
-      this.postService.update(this.post).subscribe(rs=>{
-        this.addToast(
-          "success",
-          "Thông báo",
-          "Cập nhật bài đăng thành công"
-        );
-      });
-    }
+    this.post.user_id = this.Authentication.getAuthenid();
+    console.log(this.post)
+    this.uploader.onSuccessItem = (
+      item: any,
+      response: string,
+      status: number,
+      headers: any
+    ) => {
+      this.cloudinaryImage = JSON.parse(response);
+      this.post.url_image = this.cloudinaryImage.url;
+
+      if (!this.post.id) {
+        this.postService.create(this.post).subscribe(rs => {
+          this.addToast("success", "Thông báo", "Thêm bài đăng thành công");
+        });
+      } else {
+        this.postService.update(this.post).subscribe(rs => {
+          this.addToast("success", "Thông báo", "Cập nhật bài đăng thành công");
+        });
+      }
+
+      return { item, response, status, headers };
+    };
+    this.uploader.uploadAll();
   }
 
-  backtolist(){
+  backtolist() {
     this.link_rout("myprofile");
   }
 
@@ -92,29 +120,31 @@ export class AddNewPostComponent implements OnInit {
     this.router.navigate(link, { skipLocationChange: true });
   }
 
-  clearPost(){
+  clearPost() {
     this.post = new posts();
     this.mylocation();
   }
 
   loadmap() {
-      this.geoCoder = new google.maps.Geocoder;
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+    this.geoCoder = new google.maps.Geocoder();
+    let autocomplete = new google.maps.places.Autocomplete(
+      this.searchElementRef.nativeElement,
+      {
         types: ["address"]
+      }
+    );
+    autocomplete.addListener("place_changed", () => {
+      this.ngZone.run(() => {
+        let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+        if (place.geometry === undefined || place.geometry === null) {
+          return;
+        }
+        this.post.latitude = place.geometry.location.lat();
+        this.post.longitude = place.geometry.location.lng();
+        this.zoom = 12;
       });
-      autocomplete.addListener("place_changed", () => {
-        this.ngZone.run(() => {
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
-          this.post.latitude = place.geometry.location.lat();
-          this.post.longitude = place.geometry.location.lng();
-          this.zoom = 12;
-          
-        });
-      });
-      this.getAddress();
+    });
+    this.getAddress();
   }
 
   mylocation() {
@@ -129,22 +159,25 @@ export class AddNewPostComponent implements OnInit {
   }
 
   getAddress() {
-    this.geoCoder.geocode({ 'location': { lat: this.post.latitude, lng: this.post.longitude } }, (results, status) => {
-      if (status === 'OK') {
-        if (results[0]) {
-          this.post.address = results[0].formatted_address;
+    this.geoCoder.geocode(
+      { location: { lat: this.post.latitude, lng: this.post.longitude } },
+      (results, status) => {
+        if (status === "OK") {
+          if (results[0]) {
+            this.post.address = results[0].formatted_address;
+          } else {
+            this.post.address = "";
+          }
         } else {
           this.post.address = "";
         }
-      } else {
-        this.post.address = "";
       }
-    });
+    );
   }
 
   private setCurrentPosition() {
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.getCurrentPosition(position => {
         this.post.latitude = position.coords.latitude;
         this.post.longitude = position.coords.longitude;
         this.zoom = 12;

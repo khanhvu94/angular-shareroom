@@ -32,6 +32,7 @@ export class postService {
   create(post:posts):any{
     post.city_id = 1;
     post.district_id = 1;
+    console.log(post);
     return this.http_custom.post("post",post);
   }
 
@@ -43,6 +44,11 @@ export class postService {
 
   loadById(id:number){
     return this.http_custom.get('post?id='+id);
+  }
+
+  loadByLocation(lat:number,long:number){
+    console.log('post/near?latitude='+lat+"&longitude="+long);
+    return this.http_custom.get('post/near?latitude='+lat+"&longitude="+long);
   }
 
   delete(id:number){

@@ -16,12 +16,13 @@ export class posts{
     latitude : number;
     longitude : number;
     // map_address:string;
-    create_at: number;
-    update_at: number;
+    create_at: Date;
+    update_at: Date;
     count_vote: number;
     total_vote_value: number;
     status : boolean;
     expired: number;
+    url_image: string;
     user : users;
     constructor(){};
 }

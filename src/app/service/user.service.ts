@@ -18,7 +18,6 @@ export class userService {
   }
 
   Login(person: users): any {
-    console.log(person);
     return this.http_custom.post('user/login',person);
   }
 

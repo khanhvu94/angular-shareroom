@@ -35,9 +35,10 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.userService.Login(this.person).subscribe(user => {
-      console.log(user);
       if (user) {
-        if (this.Authentication.setAuthen(user.data)) {
+        if (user.success==true) {
+          // console.log(user.data.token);
+          this.Authentication.setAuthen(user.data)
           window.location.reload();
         } else {
           this.addToast(

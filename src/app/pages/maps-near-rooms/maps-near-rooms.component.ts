@@ -22,6 +22,7 @@ import { Authentication } from "../../config/authentication";
 import { RoomDetailsComponent } from "../room-details/room-details.component";
 
 import { posts } from "../../models/posts";
+import { post } from "selenium-webdriver/http";
 
 declare var google: any;
 declare var jQuery: any;
@@ -58,11 +59,6 @@ export class MapsNearRoomsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.postService.getList().subscribe(posts => {
-      this.posts = posts.data;
-      // console.log(this.posts);
-    });
-
     this.zoom = 11;
     this.latitude = 10.821581049913508;
     this.longitude = 106.78939990781248;
@@ -84,8 +80,20 @@ export class MapsNearRoomsComponent implements OnInit {
   markerDragEnd($event: any) {
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
+    this.loadpoint();
     this.vc.clearDirections();
     this.loadmap();
+  }
+
+
+  loadpoint(){
+    this.postService.loadByLocation(this.latitude,this.longitude).subscribe(posts => {
+      if(posts){
+        this.posts = posts.data;
+      }else{
+        this.posts = null;
+      }
+    });
   }
 
   private setupPlaceChangedListener(autocomplete: any) {
@@ -116,6 +124,7 @@ export class MapsNearRoomsComponent implements OnInit {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.zoom = 12;
+        this.loadpoint();
       });
     }
   }
