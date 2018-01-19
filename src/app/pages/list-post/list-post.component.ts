@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { postService } from '../../service/post.service';
-import { Authentication } from '../../config/authentication';
-import { RoomDetailsComponent } from '../room-details/room-details.component';
+import { Component, OnInit } from "@angular/core";
+import { postService } from "../../service/post.service";
+import { Authentication } from "../../config/authentication";
+import { RoomDetailsComponent } from "../room-details/room-details.component";
 import { ActivatedRoute, Router } from "@angular/router";
 import {
   ToastyService,
@@ -10,56 +10,60 @@ import {
   ToastData
 } from "ng2-toasty";
 
-
 @Component({
-  selector: 'app-list-post',
-  templateUrl: './list-post.component.html',
-  styleUrls: ['./list-post.component.css'],
-  providers: [postService,Authentication]
+  selector: "app-list-post",
+  templateUrl: "./list-post.component.html",
+  styleUrls: ["./list-post.component.css"],
+  providers: [postService, Authentication]
 })
 export class ListPostComponent implements OnInit {
-
-  public posts : any;
+  public posts: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private postService : postService,
+    private postService: postService,
     private toastyService: ToastyService,
     public Authentication: Authentication,
     private toastyConfig: ToastyConfig
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.postService.getList().subscribe(posts => {
-      this.posts = posts.data;
-      console.log(this.posts);
-    });
+    if (this.Authentication.isAuthen()) {
+      this.postService
+        .getListByUser(this.Authentication.getAuthenid())
+        .subscribe(posts => {
+          this.posts = posts.data;
+        });
+    } else {
+      let link = [""];
+      this.router.navigate(link, { skipLocationChange: true });
+    }
   }
 
-  edit(id:number){
+  edit(id: number) {
     let link = ["/post/" + id];
     this.router.navigate(link, { skipLocationChange: true });
   }
 
-  delete(id:number){
-    console.log("delete:"+id);
-    this.postService.delete(id).subscribe(post=>{
-      console.log(post);
-        if(post){
-          if(post.success){
-            this.addToast(
-              "success",
-              "Xóa thành công",
-              "Xóa bài đăng ("+id+") thành công"
-            );
-          }else{
-            this.addToast(
-              "error",
-              "Xóa thất bại",
-              "Bạn không có quyền xóa bài đăng này"
-            );
-          }
+  delete(id: number) {
+    console.log("delete:" + id);
+    this.postService.delete(id).subscribe(post => {
+      // console.log(post);
+      if (post) {
+        if (post.success) {
+          this.addToast(
+            "success",
+            "Xóa thành công",
+            "Xóa bài đăng (" + id + ") thành công"
+          );
+        } else {
+          this.addToast(
+            "error",
+            "Xóa thất bại",
+            "Bạn không có quyền xóa bài đăng này"
+          );
         }
+      }
     });
   }
 

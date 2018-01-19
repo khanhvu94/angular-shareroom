@@ -51,6 +51,7 @@ export class Authentication {
         localStorage.removeItem('access_token');
         localStorage.removeItem('access_name');
         localStorage.removeItem('access_role');
+        localStorage.removeItem('access_id');
     }
 
     Authen_Router(){

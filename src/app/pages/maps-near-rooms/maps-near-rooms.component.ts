@@ -59,7 +59,7 @@ export class MapsNearRoomsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.zoom = 11;
+    this.zoom = 15;
     this.latitude = 10.821581049913508;
     this.longitude = 106.78939990781248;
     this.destinationOutput = new FormControl();
@@ -115,7 +115,7 @@ export class MapsNearRoomsComponent implements OnInit {
     }
     this.latitude = place.geometry.location.lat();
     this.longitude = place.geometry.location.lng();
-    this.zoom = 12;
+    this.zoom = 15;
   }
 
   private setCurrentPosition() {
@@ -123,7 +123,7 @@ export class MapsNearRoomsComponent implements OnInit {
       navigator.geolocation.getCurrentPosition(position => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
-        this.zoom = 12;
+        this.zoom = 15;
         this.loadpoint();
       });
     }

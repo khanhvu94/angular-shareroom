@@ -24,13 +24,11 @@ export class MenuBarComponent implements OnInit {
     private render: Renderer
   ) {
     this.menu = menu.Menu_left;
-    this.menu_host = menu.Menu_host;
-    this.languages = menu.laguage;
-    console.log(this.menu);
-    if (this.Authentication.isAuthen()) {
+    if(this.Authentication.isAuthen()){
+      this.menu_host = menu.Menu_host;
       this.access_name = this.Authentication.getAuthen();
-    } else {
     }
+    this.languages = menu.laguage;
   }
 
   ngOnInit() {}
@@ -41,9 +39,7 @@ export class MenuBarComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("access_name");
-    localStorage.removeItem("access_role");
+    this.Authentication.deleteAuthen();
     window.location.reload();
   }
 
